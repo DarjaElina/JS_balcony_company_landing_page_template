@@ -1,23 +1,21 @@
-import checkNumInputs from "./checkNumInputs";
+import checkNumInputs from './checkNumInputs';
 
 const forms = (state) => {
     const form = document.querySelectorAll('form'),
-          inputs = document.querySelectorAll('input'),
-          phoneInputs = document.querySelectorAll('input[name="user_phone"]');
+          inputs = document.querySelectorAll('input');
 
-    checkNumInputs('input[name="user_phone"]'); 
-
-
+    checkNumInputs('input[name="user_phone"]');
+    
     const message = {
-        loading: 'Loading...',
-        success: 'Thank you! We will contact you soon!',
-        failure: 'Something went wrong...'
+        loading: 'Загрузка...',
+        success: 'Спасибо! Скоро мы с вами свяжемся',
+        failure: 'Что-то пошло не так...'
     };
 
     const postData = async (url, data) => {
         document.querySelector('.status').textContent = message.loading;
         let res = await fetch(url, {
-            method: 'POST',
+            method: "POST",
             body: data
         });
 
@@ -27,7 +25,7 @@ const forms = (state) => {
     const clearInputs = () => {
         inputs.forEach(item => {
             item.value = '';
-        })
+        });
     };
 
     form.forEach(item => {
@@ -46,19 +44,19 @@ const forms = (state) => {
             }
 
             postData('assets/server.php', formData)
-            .then(res => {
-                console.log(res);
-                statusMessage.textContent = message.success;
-            })
-            .catch(() => statusMessage.textContent = message.failure)
-            .finally(() => {
-                clearInputs();
-                setTimeout(() =>{
-                    statusMessage.remove();
-                }, 5000)
-            });
-        })
-    })
+                .then(res => {
+                    console.log(res);
+                    statusMessage.textContent = message.success;
+                })
+                .catch(() => statusMessage.textContent = message.failure)
+                .finally(() => {
+                    clearInputs();
+                    setTimeout(() => {
+                        statusMessage.remove();
+                    }, 5000);
+                });
+        });
+    });
 };
 
 export default forms;

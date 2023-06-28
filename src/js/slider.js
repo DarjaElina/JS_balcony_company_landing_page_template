@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import 'slick-carousel';
-
+console.log('hiiiii')
 
 $(document).ready(function() {
     $('.glazing_slider').slick({
